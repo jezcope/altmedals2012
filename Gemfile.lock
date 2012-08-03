@@ -4,6 +4,8 @@ GEM
     builder (3.0.0)
     camping (2.1.467)
       rack (>= 1.0)
+    httpclient (2.2.5)
+    json (1.7.4)
     markaby (0.7.2)
       builder (>= 2.0.0)
     rack (1.4.1)
@@ -13,4 +15,6 @@ PLATFORMS
 
 DEPENDENCIES
   camping
+  httpclient
+  json
   markaby

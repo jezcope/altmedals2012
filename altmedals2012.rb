@@ -19,12 +19,19 @@ module AltMedals2012::Models
     attr_accessor :gold
     attr_accessor :silver
     attr_accessor :bronze
+
+    def self.all
+      client = HTTPClient.new
+      response = client.get('https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=london_2012_medal_table&query=select%20*%20from%20%60swdata%60')
+      JSON[response.body]
+    end
   end
 end
 
 module AltMedals2012::Controllers
   class Index < R '/'
     def get
+      @response = Nation.all
       render :index
     end
   end
@@ -39,6 +46,6 @@ module AltMedals2012::Views
   end
 
   def index
-    p "Hello world!"
+    self << @response
   end
 end
