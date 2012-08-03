@@ -53,6 +53,12 @@ module AltMedals2012::Models
     def self.all_by_weighted_total(x, y, z)
       self.all.sort_by {|nation| nation.weighted_total(x,y,z)}
     end
+
+    def self.last_updated
+      client = HTTPClient.new
+      response = client.get('https://api.scraperwiki.com/api/1.0/scraper/getinfo?format=jsondict&name=london_2012_medal_table&version=-1')
+      JSON[response.body][0]['last_run']
+    end
   end
 end
 
@@ -68,6 +74,7 @@ module AltMedals2012::Controllers
       @title = "Standard sort order"
       @description = "First by gold, then silver, then bronze"
       @nations = Nation.all_by_type
+      @last_updated = Nation.last_updated
       render :medal_table
     end
   end
@@ -77,6 +84,7 @@ module AltMedals2012::Controllers
       @title = "Sorted by total medals"
       @description = "Total number of medals, regardless of colour"
       @nations = Nation.all_by_total
+      @last_updated = Nation.last_updated
       render :medal_table
     end
   end
@@ -86,6 +94,7 @@ module AltMedals2012::Controllers
       @title = "Sorted with weighted total"
       @description = "Gold = #{x}, silver = #{y}, bronze = #{z}"
       @nations = Nation.all_by_weighted_total(x.to_i, y.to_i, z.to_i)
+      @last_updated = Nation.last_updated
       render :medal_table
     end
   end
@@ -133,5 +142,6 @@ module AltMedals2012::Views
         end
       end
     end
+    p "Data last updated #{@last_updated}"
   end
 end
