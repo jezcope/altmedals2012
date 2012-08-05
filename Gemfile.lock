@@ -4,11 +4,17 @@ GEM
     builder (3.0.0)
     camping (2.1.467)
       rack (>= 1.0)
+    daemons (1.1.8)
+    eventmachine (0.12.10)
     httpclient (2.2.5)
     json (1.7.4)
     markaby (0.7.2)
       builder (>= 2.0.0)
     rack (1.4.1)
+    thin (1.4.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
 
 PLATFORMS
   ruby
@@ -18,3 +24,4 @@ DEPENDENCIES
   httpclient
   json
   markaby
+  thin
