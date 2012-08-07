@@ -1,0 +1,20 @@
+%h1= @title
+%p.description= @description
+%table
+  %thead
+    %tr
+      %th Name
+      %th Gold
+      %th Silver
+      %th Bronze
+      %th Total
+  %tbody
+    - @nations.reverse_each do |nation|
+      %tr{id: nation.code}
+        %td.country_name= nation.name
+        %td.gold=         nation.gold
+        %td.silver=       nation.silver
+        %td.bronze=       nation.bronze
+        %td.total=        nation.total
+%p Data last updated #{@last_updated}
+
