@@ -4,6 +4,7 @@ require 'json'
 
 require 'sinatra/reloader' if development?
 
+require './database.rb'
 require './models/nation.rb'
 
 set :haml,      layout: :layout
