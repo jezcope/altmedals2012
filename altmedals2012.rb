@@ -1,6 +1,4 @@
 require 'sinatra'
-require 'httpclient'
-require 'json'
 
 require 'sinatra/reloader' if development?
 
@@ -39,6 +37,11 @@ get '/weighted/:x/:y/:z' do
   @nations = Nation.all_by_weighted_total(x.to_i, y.to_i, z.to_i)
   @last_updated = Nation.last_updated
   haml :medal_table
+end
+
+get '/update' do
+  Nation.scrape
+  markdown "Updated medal table data: #{Nation.count} nations."
 end
 
 get '/style.css' do

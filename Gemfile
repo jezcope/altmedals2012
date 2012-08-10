@@ -10,6 +10,8 @@ gem "sass"
 gem "maruku"
 gem "sequel"
 gem "sinatra-sequel"
+gem "scraperwiki"
+gem "nokogiri"
 
 group :development do
   gem "sinatra-contrib"
