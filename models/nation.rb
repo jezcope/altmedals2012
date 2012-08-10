@@ -1,56 +1,52 @@
-class Nation
-  def initialize(params)
-    @name   = params["country_name"]
-    @code   = params["country_code"]
-    @gold   = params["gold"].to_i
-    @silver = params["silver"].to_i
-    @bronze = params["bronze"].to_i
-  end
+require 'scraperwiki'
+require 'nokogiri'
 
-  attr_accessor :name
-  attr_accessor :code
-  attr_accessor :gold
-  attr_accessor :silver
-  attr_accessor :bronze
+DATA_SOURCE_URL = "http://www.bbc.co.uk/sport/olympics/2012/medals/countries"
+
+class Nation < Sequel::Model
 
   def total
-    @gold + @silver + @bronze
-  end
-
-  def weighted_total(x, y, z)
-    x*@gold + y*@silver + z*@gold
-  end
-
-  def all_medals
-    [@gold, @silver, @bronze]
+    gold + silver + bronze
   end
 
   def to_s
-    "Nation(#{@name}: #{@gold} gold, #{@silver} silver, #{@bronze} bronze)"
-  end
-
-  def self.all
-    client = HTTPClient.new
-    response = client.get('https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=london_2012_medal_table&query=select%20*%20from%20%60swdata%60')
-    JSON[response.body].map {|x| Nation.new(x)}
+    "Nation(#{name}: #{gold} gold, #{silver} silver, #{bronze} bronze)"
   end
 
   def self.all_by_type
-    self.all.sort_by {|nation| nation.all_medals}
+    order(:gold, :silver, :bronze)
   end
 
   def self.all_by_total
-    self.all.sort_by {|nation| nation.total}
+    order{gold + silver + bronze}
   end
 
   def self.all_by_weighted_total(x, y, z)
-    self.all.sort_by {|nation| nation.weighted_total(x,y,z)}
+    order{ self.*(x, gold) + self.*(y, silver) + self.*(z, bronze) }
   end
 
   def self.last_updated
-    client = HTTPClient.new
-    response = client.get('https://api.scraperwiki.com/api/1.0/scraper/getinfo?format=jsondict&name=london_2012_medal_table&version=-1')
-    DateTime.parse(JSON[response.body][0]['last_run'])
+    DateTime.new
   end
+
+  def self.scrape
+    html = ScraperWiki::scrape(DATA_SOURCE_URL)
+    doc = Nokogiri::HTML(html)
+
+    doc.css('.medals-table').each do |table|
+      table.css('tbody tr').each do |row|
+        country_info = row.at_css('.country-text')
+        code = country_info['data-country-code']
+
+        nation = Nation.find_or_create(:code => code)
+        nation.name = country_info['data-country-name']
+        [:gold, :silver, :bronze].each do |medal|
+          nation.set(medal => row.at_css("td.#{medal}").inner_html.to_i)
+        end
+        nation.save
+      end
+    end
+  end
+
 end
 
