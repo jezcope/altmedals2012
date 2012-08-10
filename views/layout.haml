@@ -4,3 +4,19 @@
     %title Alternative London 2012 Olympic medal table
   %body
     #content= yield
+    %hr
+    #links
+      :markdown
+        * [Fork it on GitHub](http://github.com/jezcope/altmetrics2012)
+        * [Follow @jezcope on Twitter](http://twitter.com/jezcope)
+        * [Read my blog, e-Rambler](http://erambler.co.uk/blog/data-scraping-olympics/)
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-34018567-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();

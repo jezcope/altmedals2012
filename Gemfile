@@ -6,7 +6,7 @@ gem "httpclient"
 gem "json"
 gem "thin"
 gem "haml"
-gem "kramdown"
+gem "maruku"
 
 group :development do
   gem "sinatra-contrib"
