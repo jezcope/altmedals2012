@@ -18,6 +18,13 @@ body {
 
 #medals {
   margin: 0 auto;
+
+  border-collapse: collapse;
+
+  td, th {
+    border: lightgrey thin solid;
+    padding: 2px;
+  }
 }
 
 a {
