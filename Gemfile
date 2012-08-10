@@ -6,6 +6,7 @@ gem "httpclient"
 gem "json"
 gem "thin"
 gem "haml"
+gem "sass"
 gem "maruku"
 
 group :development do
