@@ -58,6 +58,9 @@ class Nation
   end
 end
 
+set :haml,      layout: :layout
+set :markdown,  layout: :layout, layout_engine: :haml
+
 get '/' do
   markdown :index
 end
