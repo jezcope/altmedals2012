@@ -26,7 +26,7 @@ class Nation < Sequel::Model
   end
 
   def self.last_updated
-    DateTime.new
+    order(:updated).last.updated
   end
 
   def self.scrape
@@ -43,6 +43,7 @@ class Nation < Sequel::Model
         [:gold, :silver, :bronze].each do |medal|
           nation.set(medal => row.at_css("td.#{medal}").inner_html.to_i)
         end
+        nation.updated = DateTime.now
         nation.save
       end
     end

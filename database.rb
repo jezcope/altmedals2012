@@ -13,3 +13,8 @@ migration "create the nations table" do
   end
 end
 
+migration "add updated field to nation" do
+  database.alter_table :nations do
+    add_column :updated, DateTime
+  end
+end
