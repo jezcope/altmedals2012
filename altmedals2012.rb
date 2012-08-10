@@ -1,5 +1,10 @@
 require 'sinatra'
 
+# Explicitly require templating gems
+require 'haml'
+require 'sass'
+require 'maruku'
+
 require 'sinatra/reloader' if development?
 
 require './database.rb'
