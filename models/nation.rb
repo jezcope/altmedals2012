@@ -1,38 +1,19 @@
-class Nation
-  def initialize(params)
-    @name   = params["country_name"]
-    @code   = params["country_code"]
-    @gold   = params["gold"].to_i
-    @silver = params["silver"].to_i
-    @bronze = params["bronze"].to_i
-  end
-
-  attr_accessor :name
-  attr_accessor :code
-  attr_accessor :gold
-  attr_accessor :silver
-  attr_accessor :bronze
+class Nation < Sequel::Model
 
   def total
-    @gold + @silver + @bronze
+    gold + silver + bronze
   end
 
   def weighted_total(x, y, z)
-    x*@gold + y*@silver + z*@gold
+    x*gold + y*silver + z*gold
   end
 
   def all_medals
-    [@gold, @silver, @bronze]
+    [gold, silver, bronze]
   end
 
   def to_s
-    "Nation(#{@name}: #{@gold} gold, #{@silver} silver, #{@bronze} bronze)"
-  end
-
-  def self.all
-    client = HTTPClient.new
-    response = client.get('https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=london_2012_medal_table&query=select%20*%20from%20%60swdata%60')
-    JSON[response.body].map {|x| Nation.new(x)}
+    "Nation(#{name}: #{gold} gold, #{silver} silver, #{bronze} bronze)"
   end
 
   def self.all_by_type
@@ -48,9 +29,8 @@ class Nation
   end
 
   def self.last_updated
-    client = HTTPClient.new
-    response = client.get('https://api.scraperwiki.com/api/1.0/scraper/getinfo?format=jsondict&name=london_2012_medal_table&version=-1')
-    DateTime.parse(JSON[response.body][0]['last_run'])
+    DateTime.new
   end
+
 end
 
