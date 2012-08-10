@@ -10,6 +10,7 @@ class Nation
     @silver = params["silver"].to_i
     @bronze = params["bronze"].to_i
   end
+require 'sinatra/reloader' if development?
 
   attr_accessor :name
   attr_accessor :code
