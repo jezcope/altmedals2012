@@ -50,7 +50,7 @@ class Nation
   def self.last_updated
     client = HTTPClient.new
     response = client.get('https://api.scraperwiki.com/api/1.0/scraper/getinfo?format=jsondict&name=london_2012_medal_table&version=-1')
-    JSON[response.body][0]['last_run']
+    DateTime.parse(JSON[response.body][0]['last_run'])
   end
 end
 
