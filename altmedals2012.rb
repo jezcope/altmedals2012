@@ -39,3 +39,7 @@ get '/weighted/:x/:y/:z' do
   @last_updated = Nation.last_updated
   haml :medal_table
 end
+
+get '/style.css' do
+  scss :style
+end

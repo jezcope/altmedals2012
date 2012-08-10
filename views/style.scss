@@ -1,0 +1,33 @@
+body {
+  font-family: Georgia, Times New Roman, serif;
+
+  margin: 0;
+
+  background: lightblue;
+}
+
+#container {
+  width: 720px;
+  margin: 1em auto;
+  padding: 1em;
+  
+  background: white;
+  border-left: lightgrey thin solid;
+  border-right: lightgrey thin solid;
+}
+
+#medals {
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+
+  color: skyblue;
+
+  &:hover {
+    text-decoration: underline;
+    
+    color: hotpink;
+  }
+}

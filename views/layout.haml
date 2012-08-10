@@ -2,14 +2,16 @@
 %html
   %head
     %title Alternative London 2012 Olympic medal table
+    %link{rel: 'stylesheet', type: 'text/css', href: '/style.css'}
   %body
-    #content= yield
-    %hr
-    #links
-      :markdown
-        * [Fork it on GitHub](http://github.com/jezcope/altmedals2012)
-        * [Follow @jezcope on Twitter](http://twitter.com/jezcope)
-        * [Read my blog, e-Rambler](http://erambler.co.uk/blog/data-scraping-olympics/)
+    #container
+      #content= yield
+      %hr
+      #links
+        :markdown
+          * [Fork it on GitHub](http://github.com/jezcope/altmedals2012)
+          * [Follow @jezcope on Twitter](http://twitter.com/jezcope)
+          * [Read my blog, e-Rambler](http://erambler.co.uk/blog/data-scraping-olympics/)
     :javascript
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-34018567-1']);

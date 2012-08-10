@@ -1,6 +1,6 @@
 %h1= @title
 %p.description= @description
-%table
+%table#medals
   %thead
     %tr
       %th Name
@@ -16,5 +16,5 @@
         %td.silver=       nation.silver
         %td.bronze=       nation.bronze
         %td.total=        nation.total
-%p Data last updated #{@last_updated}
+%p.last-updated Data last updated #{@last_updated}
 
