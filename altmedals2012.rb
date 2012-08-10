@@ -108,6 +108,12 @@ module AltMedals2012::Views
         div.content! do
           self << yield
         end
+        hr
+        ul do
+          li { a "Fork it on GitHub", href: 'http://github.com/jezcope/altmedals2012' }
+          li { a "@jezcope on Twitter", href: 'http://twitter.com/jezcope' }
+          li { a "e-Rambler, my blog", href: 'http://erambler.co.uk' }
+        end
         script :type => "text/javascript" do
           "var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-34018567-1']);
@@ -132,9 +138,6 @@ module AltMedals2012::Views
       li { a "Sorted by total",       href: R(Total) }
       li { a "Sorted with weights 3/2/1", href: R(WeightedNNN, 3, 2, 1) }
       li { a "Sorted with weights 4/2/1", href: R(WeightedNNN, 4, 2, 1) }
-    end
-    p do
-      a "Fork it on GitHub", href: 'http://github.com/jezcope/altmedals2012'
     end
   end
 
