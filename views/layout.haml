@@ -5,7 +5,9 @@
     %link{rel: 'stylesheet', type: 'text/css', href: '/style.css'}
   %body
     #container
-      #content= yield
+      #content
+        %h1= @title || "Alternative medal tables"
+        = yield
       %hr
       #links
         :markdown
