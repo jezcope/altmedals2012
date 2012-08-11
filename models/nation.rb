@@ -26,11 +26,10 @@ class Nation < Sequel::Model
   end
 
   def self.last_updated
-    nation = order(:updated).last
-    unless nation.nil?
-      nation.updated
-    else
-      Time.new
+    begin
+      order(:updated).last.updated
+    rescue
+      nil
     end
   end
 
