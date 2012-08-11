@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'sinatra'
 
 # Explicitly require templating gems
@@ -45,8 +47,16 @@ get '/weighted/:x/:y/:z' do
 end
 
 get '/update' do
-  Nation.scrape
-  markdown "Updated medal table data: #{Nation.count} nations."
+  if (Time.now - Nation.last_updated) < 300
+    markdown "The data was updated less than 5 minutes ago — be patient!"
+  else
+    begin
+      Nation.scrape
+      markdown "Updated medal table data: #{Nation.count} nations."
+    rescue
+      markdown "A problem has occurred: perhaps the source site is down."
+    end
+  end
 end
 
 get '/style.css' do
