@@ -1,9 +1,14 @@
 %h1= @title
 %p.description= @description
-%p.last-updated
-  Data last updated #{@last_updated.strftime('at %R on %A %-d %B %Y')}.
-  Not fresh enough?
-  %a{href: '/update'} Update it!
+- if @last_updated.nil?
+  %p.last-updated
+    No data?
+    %a{href: '/update'} Let's go get some!
+- else
+  %p.last-updated
+    Data last updated #{@last_updated.strftime('at %R on %A %-d %B %Y')}.
+    Not fresh enough?
+    %a{href: '/update'} Update it!
 %table#medals
   %thead
     %tr
