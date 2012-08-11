@@ -24,6 +24,11 @@ body {
     border: lightgrey thin solid;
     padding: 2px;
   }
+
+  .pos-header {
+    border-left: none;
+    border-top: none;
+  }
 }
 
 a {
