@@ -1,9 +1,15 @@
+# encoding: utf-8
+
 require 'sinatra'
-require 'httpclient'
-require 'json'
+
+# Explicitly require templating gems
+require 'haml'
+require 'sass'
+require 'maruku'
 
 require 'sinatra/reloader' if development?
 
+require './database.rb'
 require './models/nation.rb'
 
 set :haml,      layout: :layout
@@ -38,6 +44,19 @@ get '/weighted/:x/:y/:z' do
   @nations = Nation.all_by_weighted_total(x.to_i, y.to_i, z.to_i)
   @last_updated = Nation.last_updated
   haml :medal_table
+end
+
+get '/update' do
+  if (Time.now - Nation.last_updated) < 300
+    markdown "The data was updated less than 5 minutes ago — be patient!"
+  else
+    begin
+      Nation.scrape
+      markdown "Updated medal table data: #{Nation.count} nations."
+    rescue
+      markdown "A problem has occurred: perhaps the source site is down."
+    end
+  end
 end
 
 get '/style.css' do
