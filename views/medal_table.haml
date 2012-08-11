@@ -12,14 +12,16 @@
 %table#medals
   %thead
     %tr
+      %th.pos-header &nbsp;
       %th Name
       %th Gold
       %th Silver
       %th Bronze
       %th Total
   %tbody
-    - @nations.reverse_each do |nation|
+    - @nations.reverse_each.with_index do |nation, i|
       %tr{id: nation.code}
+        %td.position=     i + 1
         %td.country_name= nation.name
         %td.gold=         nation.gold
         %td.silver=       nation.silver
