@@ -26,7 +26,12 @@ class Nation < Sequel::Model
   end
 
   def self.last_updated
-    order(:updated).last.updated
+    nation = order(:updated).last
+    unless nation.nil?
+      nation.updated
+    else
+      Time.new
+    end
   end
 
   def self.scrape
