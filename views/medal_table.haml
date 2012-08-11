@@ -1,5 +1,9 @@
 %h1= @title
 %p.description= @description
+%p.last-updated
+  Data last updated #{@last_updated.strftime('at %R on %A %-d %B %Y')}.
+  Not fresh enough?
+  %a{href: '/update'} Update it!
 %table#medals
   %thead
     %tr
@@ -16,5 +20,4 @@
         %td.silver=       nation.silver
         %td.bronze=       nation.bronze
         %td.total=        nation.total
-%p.last-updated Data last updated #{@last_updated}
 
