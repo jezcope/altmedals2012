@@ -47,7 +47,7 @@ get '/weighted/:x/:y/:z' do
 end
 
 get '/update' do
-  if (Time.now - Nation.last_updated) < 300
+  if Nation.count > 0 && (Time.now - Nation.last_updated) < 300
     markdown "The data was updated less than 5 minutes ago — be patient!"
   else
     begin

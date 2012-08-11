@@ -26,7 +26,11 @@ class Nation < Sequel::Model
   end
 
   def self.last_updated
-    order(:updated).last.updated
+    begin
+      order(:updated).last.updated
+    rescue
+      nil
+    end
   end
 
   def self.scrape
