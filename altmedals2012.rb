@@ -47,16 +47,19 @@ get '/weighted/:x/:y/:z' do
 end
 
 get '/update' do
+  @title = "Update data"
   if Nation.count > 0 && (Time.now - Nation.last_updated) < 300
-    markdown "The data was updated less than 5 minutes ago — be patient!"
+    @message = "The data was updated less than 5 minutes ago — be patient!"
   else
     begin
       Nation.scrape
-      markdown "Updated medal table data: #{Nation.count} nations."
+      @message = "Updated medal table data: #{Nation.count} nations."
     rescue
-      markdown "A problem has occurred: perhaps the source site is down."
+      @message = "A problem has occurred: perhaps the source site is down."
     end
   end
+
+  haml :update
 end
 
 get '/style.css' do
