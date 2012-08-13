@@ -1,7 +1,10 @@
 !!!
 %html
   %head
-    %title Alternative London 2012 Olympic medal table
+    %title
+      - if @title
+        #{@title} ||
+      Alternative London 2012 Olympic medal table
     %link{rel: 'stylesheet', type: 'text/css', href: '/style.css'}
   %body
     #container
