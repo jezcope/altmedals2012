@@ -14,7 +14,7 @@ GEM
       syntax (>= 1.0.0)
     nokogiri (1.5.5)
     pg (0.14.0)
-    rack (1.4.1)
+    rack (1.6.12)
     rack-protection (1.2.0)
       rack
     rack-test (0.6.1)
